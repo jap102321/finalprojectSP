@@ -1,26 +1,56 @@
 package com.sophfp.sophosfp.dto;
 
-import jakarta.persistence.Column;
+import org.springframework.cglib.core.Local;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 public class ClientDTO {
 
+    private String idType;
     private String name;
     private String lastname;
+    private Long document;
     private String email;
-    private Date birthDate;
-    private Date updateDate;
+    private LocalDate birthDate;
+    private LocalDate creationDate = LocalDate.now();
+    private LocalDate updateDate;
     private String updateUser;
 
 
-    public ClientDTO(Long id, String name, String lastname, String email, Date birthDate, Date updateDate, String updateUser) {
+    public ClientDTO(String idType, String name, String lastname,Long document, String email, LocalDate birthDate, LocalDate updateDate) {
+        this.idType = idType;
         this.name = name;
         this.lastname = lastname;
+        this.document = document;
         this.email = email;
         this.birthDate = birthDate;
         this.updateDate = updateDate;
-        this.updateUser = updateUser;
+    }
+
+    public String getIdType() {
+        return idType;
+    }
+
+    public void setIdType(String idType) {
+        this.idType = idType;
+    }
+
+    public Long getDocument() {
+        return document;
+    }
+
+    public void setDocument(Long document) {
+        this.document = document;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 
     public String getName() {
@@ -47,19 +77,19 @@ public class ClientDTO {
         this.email = email;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Date getUpdateDate() {
+    public LocalDate getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDate updateDate) {
         this.updateDate = updateDate;
     }
 
@@ -70,4 +100,7 @@ public class ClientDTO {
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
+
+
 }
+

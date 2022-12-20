@@ -1,8 +1,10 @@
 package com.sophfp.sophosfp.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,16 +14,28 @@ public class Client implements Serializable {
     @Column(name = "CLIENT_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "ID_TYPE")
+    private String idType;
     @Column(name="NAME")
     private String name;
     @Column(name = "LAST_NAME")
     private String lastname;
+    @Column (name = "DOCUMENT")
+    private Long document;
     @Column(name="EMAIL")
     private String email;
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     @Column(name = "BIRTH_DATE")
-    private Date birthDate;
+    private LocalDate birthDate;
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+
+    @Column(name = "CREATION_DATE")
+    private LocalDate creationDate = LocalDate.now();
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+
     @Column(name="UPDATE_DATE")
-    private Date updateDate;
+    private LocalDate updateDate;
+
     @Column(name = "UPDATE_USER")
     private String updateUser;
 
@@ -29,14 +43,37 @@ public class Client implements Serializable {
 
     }
 
-    public Client(Long id, String name, String lastname, String email, Date birthDate, Date updateDate, String updateUser) {
-        this.id = id;
+    public Client(String idType, String name, String lastname, Long document, String email, LocalDate birthDate) {
+        this.idType = idType;
         this.name = name;
         this.lastname = lastname;
+        this.document = document;
         this.email = email;
         this.birthDate = birthDate;
+
+    }
+
+    public Client(LocalDate updateDate, String updateUser){
         this.updateDate = updateDate;
         this.updateUser = updateUser;
+    }
+
+
+
+    public String getIdType() {
+        return idType;
+    }
+
+    public void setIdType(String idType) {
+        this.idType = idType;
+    }
+
+    public long getDocument() {
+        return document;
+    }
+
+    public void setDocument(long document) {
+        this.document = document;
     }
 
     public Long getId() {
@@ -67,23 +104,31 @@ public class Client implements Serializable {
         return email;
     }
 
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Date getUpdateDate() {
+    public LocalDate getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDate updateDate) {
         this.updateDate = updateDate;
     }
 
