@@ -43,14 +43,14 @@ public class Client implements Serializable {
 
     }
 
-    public Client(String idType, String name, String lastname, Long document, String email, LocalDate birthDate) {
+    public Client(String idType, String name, String lastname, Long document, String email, LocalDate birthDate, LocalDate creationDate) {
         this.idType = idType;
         this.name = name;
         this.lastname = lastname;
         this.document = document;
         this.email = email;
         this.birthDate = birthDate;
-
+        this.creationDate = creationDate;
     }
 
     public Client(LocalDate updateDate, String updateUser){

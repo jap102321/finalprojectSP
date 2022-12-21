@@ -37,7 +37,7 @@ public class ClientController {
         return new ResponseEntity<Client>(client,HttpStatus.OK);
     }
 
-    @PostMapping("/registerClient")
+    @PostMapping("/registerclient")
     public ResponseEntity<?> create(@RequestBody ClientDTO clientDTO){
         if (StringUtils.isBlank(clientDTO.getName()))
             return new ResponseEntity<>(new Message("The name is mandatory"), HttpStatus.BAD_REQUEST);
@@ -46,7 +46,7 @@ public class ClientController {
         if(clientService.existsById(clientDTO.getDocument()))
             return new ResponseEntity<>(new Message("The document is already registered"), HttpStatus.BAD_REQUEST);
 
-        Client client = new Client(clientDTO.getIdType(),clientDTO.getName(), clientDTO.getLastname(), clientDTO.getDocument(),clientDTO.getEmail(),clientDTO.getBirthDate());
+        Client client = new Client(clientDTO.getIdType(),clientDTO.getName(), clientDTO.getLastname(), clientDTO.getDocument(),clientDTO.getEmail(),clientDTO.getBirthDate(),clientDTO.getCreationDate());
 
         int years = Period.between(clientDTO.getBirthDate(), clientDTO.getCreationDate()).getYears();
         if(years < 18)
@@ -57,6 +57,25 @@ public class ClientController {
             return new ResponseEntity<>(new Message("Client added to the DBase"), HttpStatus.OK);
     }
 
+    @PutMapping("update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody ClientDTO clientDTO){
+        if(!clientService.existsById(id))
+            return new ResponseEntity(new Message("No existe"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(clientDTO.getUpdateUser()))
+            return new ResponseEntity<>(new Message("The update user is mandatory"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(clientDTO.getEmail()))
+            return new ResponseEntity<>(new Message("The email is mandatory"), HttpStatus.BAD_REQUEST);
+
+
+        Client client = clientService.getOne(id).get();
+        client.setUpdateUser(clientDTO.getUpdateUser());
+        client.setUpdateDate(clientDTO.getUpdateDate());
+        client.setEmail(clientDTO.getEmail());
+        clientService.save(client);
+
+        return new ResponseEntity<>(new Message("Client updated"), HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id){
         if(!clientService.existsById(id))
@@ -64,4 +83,9 @@ public class ClientController {
         clientService.delete(id);
         return new ResponseEntity<>(new Message("User eliminated"), HttpStatus.OK);
     }
+
+
+
+
+
 }

@@ -15,7 +15,7 @@ public class ClientDTO {
     private String email;
     private LocalDate birthDate;
     private LocalDate creationDate = LocalDate.now();
-    private LocalDate updateDate;
+    private LocalDate updateDate = LocalDate.now();
     private String updateUser;
 
 
