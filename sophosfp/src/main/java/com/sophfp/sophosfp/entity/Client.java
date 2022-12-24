@@ -1,11 +1,14 @@
 package com.sophfp.sophosfp.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "CLIENT_TABLE")
@@ -34,10 +37,13 @@ public class Client implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
 
     @Column(name="UPDATE_DATE")
-    private LocalDate updateDate;
+    private LocalDate updateDate = LocalDate.now();
 
     @Column(name = "UPDATE_USER")
     private String updateUser;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Account> accounts = new ArrayList<>();
 
     public Client(){
 
@@ -57,6 +63,7 @@ public class Client implements Serializable {
         this.updateDate = updateDate;
         this.updateUser = updateUser;
     }
+
 
 
 
@@ -139,4 +146,14 @@ public class Client implements Serializable {
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
+
+    @JsonManagedReference
+    public List<Account> getAccounts(){
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts){
+        this.accounts = accounts;
+    }
 }
+

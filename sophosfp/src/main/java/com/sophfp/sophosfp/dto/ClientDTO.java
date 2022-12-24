@@ -19,14 +19,13 @@ public class ClientDTO {
     private String updateUser;
 
 
-    public ClientDTO(String idType, String name, String lastname,Long document, String email, LocalDate birthDate, LocalDate updateDate) {
+    public ClientDTO(String idType, String name, String lastname,Long document, String email, LocalDate birthDate) {
         this.idType = idType;
         this.name = name;
         this.lastname = lastname;
         this.document = document;
         this.email = email;
         this.birthDate = birthDate;
-        this.updateDate = updateDate;
     }
 
     public String getIdType() {

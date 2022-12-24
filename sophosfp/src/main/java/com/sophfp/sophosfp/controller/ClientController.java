@@ -67,11 +67,11 @@ public class ClientController {
             return new ResponseEntity<>(new Message("The email is mandatory"), HttpStatus.BAD_REQUEST);
 
 
-        Client client = clientService.getOne(id).get();
-        client.setUpdateUser(clientDTO.getUpdateUser());
-        client.setUpdateDate(clientDTO.getUpdateDate());
-        client.setEmail(clientDTO.getEmail());
-        clientService.save(client);
+        Client clientActu = clientService.getOne(id).get();
+        clientActu.setUpdateUser(clientDTO.getUpdateUser());
+        clientActu.setUpdateDate(clientDTO.getUpdateDate());
+        clientActu.setEmail(clientDTO.getEmail());
+        clientService.save(clientActu);
 
         return new ResponseEntity<>(new Message("Client updated"), HttpStatus.OK);
     }

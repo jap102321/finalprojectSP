@@ -1,36 +1,50 @@
 package com.sophfp.sophosfp.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name = "accounts")
 public class Account {
     @Id
     @Column(name = "ACCOUNT_ID")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long acc_id;
-    @Column(name = "UID")
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="CLIENT_ID")
     private Client client;
     @Column(name = "ACCOUNTS")
     private String acc_number;
-    private String acc_name;
+    @Column(name = "ACC_TYPE")
     private String acc_type;
     @Column(name = "BALANCE")
     private Double balance;
     @Column(name = "DATE_DB")
     private LocalDate created_at = LocalDate.now();
     private LocalDate updated_at = LocalDate.now();
+    @Column(name = "ACC_STATUS")
+    private String acc_status;
 
 
-    private List<Client> clients = new ArrayList<>();
     public Account(){
 
+    }
+
+    public Account(String acc_number, String acc_type) {
+        this.acc_number = acc_number;
+        this.acc_type = acc_type;
+    }
+
+    public Account(Client client, String acc_type, String acc_number, Double balance, LocalDate created_at, String acc_status) {
+        this.client = client;
+        this.acc_type = acc_type;
+        this.acc_number = acc_number;
+        this.balance = balance;
+        this.created_at = created_at;
+        this.acc_status = acc_status;
     }
 
     public Long getAcc_id() {
@@ -40,29 +54,13 @@ public class Account {
     public void setAcc_id(Long acc_id) {
         this.acc_id = acc_id;
     }
-
+    @JsonBackReference
     public Client getClient() {
         return client;
     }
 
     public void setClient(Client client) {
         this.client = client;
-    }
-
-    public String getAcc_number() {
-        return acc_number;
-    }
-
-    public void setAcc_number(String acc_number) {
-        this.acc_number = acc_number;
-    }
-
-    public String getAcc_name() {
-        return acc_name;
-    }
-
-    public void setAcc_name(String acc_name) {
-        this.acc_name = acc_name;
     }
 
     public String getAcc_type() {
@@ -72,6 +70,32 @@ public class Account {
     public void setAcc_type(String acc_type) {
         this.acc_type = acc_type;
     }
+    public String getAcc_number() {
+        String n = "01234556789";
+        int length= 8;
+        StringBuilder builder = new StringBuilder(length);
+        if(getAcc_type().equalsIgnoreCase("savings")){
+            this.acc_number = "46";
+            builder.append(this.acc_number);
+        } else if (getAcc_type().equalsIgnoreCase("checking")) {
+            this.acc_number = "23";
+            builder.append(this.acc_number);
+        }
+        for(int x = 0; x < length; ++x) {
+            double Random = Math.random() * (double)n.length();
+            int pos = (int)Random;
+            char letter = n.charAt(pos);
+            builder.append(letter);
+        }
+        acc_number = builder.toString();
+        return acc_number; 
+    }
+
+    public void setAcc_number(String acc_number) {
+        this.acc_number = acc_number;
+    }
+
+
 
     public Double getBalance() {
         return balance;
@@ -97,13 +121,12 @@ public class Account {
         this.updated_at = updated_at;
     }
 
-    public List<Client> getClients(){
-        return clients;
+    public String isAcc_status() {
+        return acc_status;
     }
 
-    public void setClients(List<Client> clients){
-        this.clients = clients;
+    public void setAcc_status(String acc_status) {
+        this.acc_status = acc_status;
     }
-
-
 }
+
