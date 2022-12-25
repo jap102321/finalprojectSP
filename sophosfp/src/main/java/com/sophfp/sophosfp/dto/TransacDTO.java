@@ -1,55 +1,28 @@
-package com.sophfp.sophosfp.entity;
+package com.sophfp.sophosfp.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+import com.sophfp.sophosfp.entity.Account;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
-@Table(name = "transactions")
-public class Transaction {
+public class TransacDTO {
 
-    @Id
-    @Column(name = "TRANSAC_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long trans_id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
-    @Column(name = "TRANSACTION_TYPE")
     private String transac_type;
-
-    @Column(name = "AMOUNT")
     private Double amount;
-
-    @Column(name = "RECEIVER_ACC")
     private String rec_acc;
-    @Column(name="TRANSAC_DATE")
     private LocalDate transac_date = LocalDate.now();
 
-    public Transaction(){
-
+    public TransacDTO() {
     }
 
-    public Transaction(Account account, String transac_type,String rec_acc ,Double amount, LocalDate transac_date) {
+    public TransacDTO(Account account, String transac_type, Double amount, String rec_acc, LocalDate transac_date) {
         this.account = account;
         this.transac_type = transac_type;
-        this.rec_acc = rec_acc;
         this.amount = amount;
+        this.rec_acc = rec_acc;
         this.transac_date = transac_date;
     }
 
-    public Long getTrans_id() {
-        return trans_id;
-    }
-
-    public void setTrans_id(Long trans_id) {
-        this.trans_id = trans_id;
-    }
-
-    @JsonBackReference
     public Account getAccount() {
         return account;
     }

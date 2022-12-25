@@ -1,9 +1,11 @@
 package com.sophfp.sophosfp.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,6 +19,7 @@ public class Account {
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="CLIENT_ID")
     private Client client;
+
     @Column(name = "ACCOUNTS")
     private String acc_number;
     @Column(name = "ACC_TYPE")
@@ -29,10 +32,13 @@ public class Account {
     @Column(name = "ACC_STATUS")
     private String acc_status;
 
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Transaction> transactions = new ArrayList<>();
 
     public Account(){
 
     }
+
 
 
 
@@ -110,6 +116,14 @@ public class Account {
 
     public void setAcc_status(String acc_status) {
         this.acc_status = acc_status;
+    }
+    @JsonManagedReference
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }
 
