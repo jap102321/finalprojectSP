@@ -71,7 +71,7 @@ public class AccountDTO {
         this.updated_at = updated_at;
     }
 
-    public String isAcc_status() {
+    public String getAcc_status() {
         return acc_status;
     }
 

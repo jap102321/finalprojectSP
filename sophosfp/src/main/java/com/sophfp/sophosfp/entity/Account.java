@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -33,10 +34,7 @@ public class Account {
 
     }
 
-    public Account(String acc_number, String acc_type) {
-        this.acc_number = acc_number;
-        this.acc_type = acc_type;
-    }
+
 
     public Account(Client client, String acc_type, String acc_number, Double balance, LocalDate created_at, String acc_status) {
         this.client = client;
@@ -45,6 +43,10 @@ public class Account {
         this.balance = balance;
         this.created_at = created_at;
         this.acc_status = acc_status;
+    }
+
+    public Account(LocalDate updated_at){
+        this.updated_at = updated_at;
     }
 
     public Long getAcc_id() {
@@ -71,31 +73,12 @@ public class Account {
         this.acc_type = acc_type;
     }
     public String getAcc_number() {
-        String n = "01234556789";
-        int length= 8;
-        StringBuilder builder = new StringBuilder(length);
-        if(getAcc_type().equalsIgnoreCase("savings")){
-            this.acc_number = "46";
-            builder.append(this.acc_number);
-        } else if (getAcc_type().equalsIgnoreCase("checking")) {
-            this.acc_number = "23";
-            builder.append(this.acc_number);
-        }
-        for(int x = 0; x < length; ++x) {
-            double Random = Math.random() * (double)n.length();
-            int pos = (int)Random;
-            char letter = n.charAt(pos);
-            builder.append(letter);
-        }
-        acc_number = builder.toString();
-        return acc_number; 
+        return acc_number;
     }
 
     public void setAcc_number(String acc_number) {
         this.acc_number = acc_number;
     }
-
-
 
     public Double getBalance() {
         return balance;
@@ -121,7 +104,7 @@ public class Account {
         this.updated_at = updated_at;
     }
 
-    public String isAcc_status() {
+    public String getAcc_status() {
         return acc_status;
     }
 

@@ -54,7 +54,7 @@ public class ClientController {
 
         clientService.save(client);
 
-            return new ResponseEntity<>(new Message("Client added to the DBase"), HttpStatus.OK);
+            return new ResponseEntity<>(new Message("Client added to the DBase"), HttpStatus.CREATED);
     }
 
     @PutMapping("update/{id}")
@@ -67,11 +67,10 @@ public class ClientController {
             return new ResponseEntity<>(new Message("The email is mandatory"), HttpStatus.BAD_REQUEST);
 
 
-        Client clientActu = clientService.getOne(id).get();
-        clientActu.setUpdateUser(clientDTO.getUpdateUser());
-        clientActu.setUpdateDate(clientDTO.getUpdateDate());
-        clientActu.setEmail(clientDTO.getEmail());
-        clientService.save(clientActu);
+        Client clientUpd = clientService.getOne(id).get();
+        clientUpd.setUpdateDate(clientDTO.getUpdateDate());
+        clientUpd.setEmail(clientDTO.getEmail());
+        clientService.save(clientUpd);
 
         return new ResponseEntity<>(new Message("Client updated"), HttpStatus.OK);
     }
