@@ -60,7 +60,7 @@ public class ClientController {
     @PutMapping("update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody ClientDTO clientDTO){
         if(!clientService.existsById(id))
-            return new ResponseEntity(new Message("No existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("It does not exists"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(clientDTO.getUpdateUser()))
             return new ResponseEntity<>(new Message("The update user is mandatory"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(clientDTO.getEmail()))

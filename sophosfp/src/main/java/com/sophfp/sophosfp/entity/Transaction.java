@@ -18,14 +18,13 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
-    @Column(name = "TRANSACTION_TYPE")
+    @Column(name = "TRANSAC_TYPE")
     private String transac_type;
 
     @Column(name = "AMOUNT")
     private Double amount;
 
-    @Column(name = "RECEIVER_ACC")
-    private String rec_acc;
+
     @Column(name="TRANSAC_DATE")
     private LocalDate transac_date = LocalDate.now();
 
@@ -33,10 +32,9 @@ public class Transaction {
 
     }
 
-    public Transaction(Account account, String transac_type,String rec_acc ,Double amount, LocalDate transac_date) {
+    public Transaction(Account account, String transac_type,Double amount, LocalDate transac_date) {
         this.account = account;
         this.transac_type = transac_type;
-        this.rec_acc = rec_acc;
         this.amount = amount;
         this.transac_date = transac_date;
     }
@@ -74,13 +72,6 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public String getRec_acc() {
-        return rec_acc;
-    }
-
-    public void setRec_acc(String rec_acc) {
-        this.rec_acc = rec_acc;
-    }
 
     public LocalDate getTransac_date() {
         return transac_date;

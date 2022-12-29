@@ -1,13 +1,9 @@
 package com.sophfp.sophosfp.controller;
 
 import com.sophfp.sophosfp.dto.AccountDTO;
-import com.sophfp.sophosfp.dto.ClientReq;
 import com.sophfp.sophosfp.dto.Message;
 import com.sophfp.sophosfp.dto.genAccNum;
 import com.sophfp.sophosfp.entity.Account;
-import com.sophfp.sophosfp.entity.Client;
-import com.sophfp.sophosfp.repository.AccountRepository;
-import com.sophfp.sophosfp.repository.ClientRepository;
 import com.sophfp.sophosfp.service.AccountService;
 import com.sophfp.sophosfp.service.ClientService;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -29,6 +24,16 @@ public class AccountController {
     private ClientService clientService;
 
 
+    @GetMapping("/account/{id}")
+    public ResponseEntity<Account> getById(@PathVariable("id") long id){
+        if(!accountService.existsById(id)){
+            return new ResponseEntity(new Message("The account does not exists"), HttpStatus.NOT_FOUND);
+        }
+       Account account = accountService.getOne(id).get();
+        return new ResponseEntity<Account>(account,HttpStatus.OK);
+    }
+
+
     @PostMapping("/addaccount")
     public ResponseEntity<?> create(@RequestBody AccountDTO accountDTO){
         if(StringUtils.isBlank(accountDTO.getAcc_type()))
@@ -37,12 +42,13 @@ public class AccountController {
         //Generate Acc Number
         String setAccNumber = genAccNum.genAccNum(accountDTO.getAcc_type());
 
-        Account acc = new Account(accountDTO.getClient(),accountDTO.getAcc_type(),setAccNumber, accountDTO.getBalance(), accountDTO.getCreated_at(),accountDTO.getAcc_status());
+        Account acc = new Account(accountDTO.getClient(),accountDTO.getAcc_type(),setAccNumber, accountDTO.getBalance(),
+                accountDTO.getCreated_at(),accountDTO.getAcc_status());
         accountService.save(acc);
         return new ResponseEntity<>(new Message("Account created"), HttpStatus.CREATED);
     }
-    @PutMapping("updateacc/{acc_id}")
-    public ResponseEntity<?> update(@PathVariable("acc_id") Long id, @RequestBody AccountDTO accountDTO){
+    @PutMapping("updateacc/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody AccountDTO accountDTO){
         if(!accountService.existsById(id)){
             return new ResponseEntity<>(new Message("The account don't exist"), HttpStatus.BAD_REQUEST);
         }
@@ -57,7 +63,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/deleteacc/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id, @RequestParam("balance") Double balanceAcc, RedirectAttributes redirectAttributes){
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
         if(!accountService.existsById(id))
             return new ResponseEntity<>(new Message("The account does not exist"), HttpStatus.NOT_FOUND);
 

@@ -14,12 +14,9 @@ import java.util.Optional;
 public class TransactionService {
     @Autowired
     private TransacRepository transacRepository;
-
     public Optional<Transaction> getOne(Account account){
         return transacRepository.findByAccount(account);
     }
-
-
 
     public void save(Transaction transaction){
         transacRepository.save(transaction);

@@ -15,7 +15,9 @@ public class AccountDTO {
     private LocalDate updated_at = LocalDate.now();
     private String acc_status;
 
+    public AccountDTO(){
 
+    }
     public AccountDTO(Client client, String acc_type, Double balance, String acc_status) {
         this.client = client;
         this.acc_type = acc_type;

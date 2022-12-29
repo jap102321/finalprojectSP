@@ -21,9 +21,11 @@ public class Account {
     private Client client;
 
     @Column(name = "ACCOUNTS")
+    @JoinColumn(name="ACCOUNT_ID")
     private String acc_number;
     @Column(name = "ACC_TYPE")
     private String acc_type;
+
     @Column(name = "BALANCE")
     private Double balance;
     @Column(name = "DATE_DB")
@@ -38,8 +40,6 @@ public class Account {
     public Account(){
 
     }
-
-
 
 
     public Account(Client client, String acc_type, String acc_number, Double balance, LocalDate created_at, String acc_status) {
