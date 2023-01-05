@@ -23,8 +23,8 @@ public class AccountService {
         return accountRepository.existsByaccNumber(accNumber);
     }
 
-    public List<Account> findByClient(Long id){
-        return accountRepository.findByClient(id);
+    public List<Account> findByClientId(Long id){
+        return accountRepository.findByClientId(id);
     }
 
     public Optional<Account> getOne(Long id){
