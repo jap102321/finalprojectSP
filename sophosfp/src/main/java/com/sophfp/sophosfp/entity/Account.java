@@ -22,7 +22,7 @@ public class Account {
 
     @Column(name = "ACCOUNTS")
     @JoinColumn(name="ACCOUNT_ID")
-    private String acc_number;
+    private String accNumber;
     @Column(name = "ACC_TYPE")
     private String acc_type;
 
@@ -42,10 +42,10 @@ public class Account {
     }
 
 
-    public Account(Client client, String acc_type, String acc_number, Double balance, LocalDate created_at, String acc_status) {
+    public Account(Client client, String acc_type, String accNumber, Double balance, LocalDate created_at, String acc_status) {
         this.client = client;
         this.acc_type = acc_type;
-        this.acc_number = acc_number;
+        this.accNumber = accNumber;
         this.balance = balance;
         this.created_at = created_at;
         this.acc_status = acc_status;
@@ -78,12 +78,13 @@ public class Account {
     public void setAcc_type(String acc_type) {
         this.acc_type = acc_type;
     }
-    public String getAcc_number() {
-        return acc_number;
+
+    public String getAccNumber() {
+        return accNumber;
     }
 
-    public void setAcc_number(String acc_number) {
-        this.acc_number = acc_number;
+    public void setAccNumber(String accNumber) {
+        this.accNumber = accNumber;
     }
 
     public Double getBalance() {

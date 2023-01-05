@@ -4,16 +4,16 @@ import java.util.Random;
 
 public class genAccNum {
     public static String genAccNum(String acc_type){
-        String acc_num;
+        String accNumber;
         String bank = "0123456789";
         int length = 8;
         StringBuilder builder = new StringBuilder(length);
         if(acc_type.equalsIgnoreCase("savings")){
-            acc_num = "46";
-            builder.append(acc_num);
+            accNumber = "46";
+            builder.append(accNumber);
         } else if (acc_type.equalsIgnoreCase("checking")) {
-            acc_num = "23";
-            builder.append(acc_num);
+            accNumber = "23";
+            builder.append(accNumber);
         }
         for(int x = 0; x < length; ++x ){
             double Random = Math.random() * (double)bank.length();
@@ -21,7 +21,7 @@ public class genAccNum {
             char letter = bank.charAt(pos);
             builder.append(letter);
         }
-        acc_num = builder.toString();
-        return acc_num;
+        accNumber = builder.toString();
+        return accNumber;
     }
 }

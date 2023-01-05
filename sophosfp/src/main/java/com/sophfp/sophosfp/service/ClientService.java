@@ -28,6 +28,10 @@ public class ClientService {
         return clientRepository.existsById(id);
     }
 
+    public boolean existsByDocument(Long document){
+        return clientRepository.existsByDocument(document);
+    }
+
     public void save(Client client){
         clientRepository.save(client);
     }

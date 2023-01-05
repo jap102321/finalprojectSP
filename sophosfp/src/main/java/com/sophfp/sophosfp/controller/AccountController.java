@@ -24,13 +24,13 @@ public class AccountController {
     private ClientService clientService;
 
 
-    @GetMapping("/account/{id}")
-    public ResponseEntity<Account> getById(@PathVariable("id") long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Account>> getByClient(@PathVariable("id") Long id){
         if(!accountService.existsById(id)){
             return new ResponseEntity(new Message("The account does not exists"), HttpStatus.NOT_FOUND);
         }
-       Account account = accountService.getOne(id).get();
-        return new ResponseEntity<Account>(account,HttpStatus.OK);
+        List<Account> accsByClient = accountService.findByClient(id);
+        return new ResponseEntity<List<Account>>(accsByClient,HttpStatus.OK);
     }
 
 

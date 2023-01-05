@@ -19,6 +19,14 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
+    public boolean existsByaccNumber(String accNumber){
+        return accountRepository.existsByaccNumber(accNumber);
+    }
+
+    public List<Account> findByClient(Long id){
+        return accountRepository.findByClient(id);
+    }
+
     public Optional<Account> getOne(Long id){
         return accountRepository.findById(id);
     }

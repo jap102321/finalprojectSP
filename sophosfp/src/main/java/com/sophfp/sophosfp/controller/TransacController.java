@@ -25,7 +25,7 @@ public class TransacController {
     AccountService accountService;
     @Autowired
     AccountRepository accountRepository;
-    @PostMapping("/deposit")
+    @PostMapping("/inacc")
     public ResponseEntity<?> transac(@RequestBody TransacDTO transacDTO){
         Long acc_id = transacDTO.getAccount().getAcc_id();
         if(StringUtils.isBlank(transacDTO.getTransac_type()))
@@ -33,18 +33,28 @@ public class TransacController {
         if(transacDTO.getAccount().equals("")){
             return new ResponseEntity<>(new Message("You should add an account"), HttpStatus.BAD_REQUEST);
         }
+        Account accountUpd = accountService.getOne(acc_id).get();
+        Transaction transaction = new Transaction(transacDTO.getAccount(),transacDTO.getTransac_type(),transacDTO.getAmount(),transacDTO.getTransac_date());
 
-       Account accountUpd = accountService.getOne(acc_id).get();
-       Transaction transaction = new Transaction(transacDTO.getAccount(),transacDTO.getTransac_type(),transacDTO.getAmount(),transacDTO.getTransac_date());
-       double currentBalance= accountUpd.getBalance();
-       double amountTransac = transacDTO.getAmount();
-       double addedValue = currentBalance + amountTransac ;
-       accountUpd.setBalance(addedValue);
-       accountService.save(accountUpd);
-       transactionService.save(transaction);
+        double currentBalance= accountUpd.getBalance();
+        double amountTransac = transacDTO.getAmount();
 
 
-       return new ResponseEntity<>(new Message("Deposit successful"), HttpStatus.OK);
+        if(transacDTO.getTransac_type().equalsIgnoreCase("deposit")){
+
+            double addedValue = currentBalance + amountTransac ;
+            accountUpd.setBalance(addedValue);
+
+        } else if (transacDTO.getTransac_type().equalsIgnoreCase("withdraw")) {
+            double addedValue = currentBalance - amountTransac ;
+            accountUpd.setBalance(addedValue);
+
+        }
+
+        accountService.save(accountUpd);
+        transactionService.save(transaction);
+
+       return new ResponseEntity<>(new Message("Transaction successful"), HttpStatus.OK);
     }
 
     @PostMapping("/withdraw")
@@ -60,9 +70,7 @@ public class TransacController {
         Transaction transaction = new Transaction(transacDTO.getAccount(),transacDTO.getTransac_type(),transacDTO.getAmount(),transacDTO.getTransac_date());
         double currentBalance= accountUpd.getBalance();
         double amountTransac = transacDTO.getAmount();
-        double addedValue = currentBalance - amountTransac ;
-        accountUpd.setBalance(addedValue);
-        accountService.save(accountUpd);
+                accountService.save(accountUpd);
         transactionService.save(transaction);
 
 

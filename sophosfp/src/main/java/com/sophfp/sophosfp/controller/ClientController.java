@@ -43,7 +43,7 @@ public class ClientController {
             return new ResponseEntity<>(new Message("The name is mandatory"), HttpStatus.BAD_REQUEST);
         if (StringUtils.isBlank(clientDTO.getEmail()))
             return new ResponseEntity<>(new Message("The email is mandatory"), HttpStatus.BAD_REQUEST);
-        if(clientService.existsById(clientDTO.getDocument()))
+        if(clientService.existsByDocument(clientDTO.getDocument()))
             return new ResponseEntity<>(new Message("The document is already registered"), HttpStatus.BAD_REQUEST);
 
         Client client = new Client(clientDTO.getIdType(),clientDTO.getName(), clientDTO.getLastname(), clientDTO.getDocument(),clientDTO.getEmail(),clientDTO.getBirthDate(),clientDTO.getCreationDate());
