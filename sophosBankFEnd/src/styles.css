@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@import  ' ~animate.css/animate.min';
+@import 'ngx-toastr/toastr';
+:root{
+ --font: 'Ubuntu', sans-serif;   
+ --secondaryFont : 'Varela Round', sans-serif;
+ --body: normal 1rem/1.375rem var(--font);
+ --bold: normal 1.3rem/1.75rem var(--font);
+}
+
+body{
+    background-color: black;
+    font-family: var(--font);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+
+}

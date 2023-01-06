@@ -1,0 +1,33 @@
+.navigationBar{
+    display: flex;
+    background-color: #000;
+}
+
+.sticky{
+    position: sticky;
+    top: 0;
+}
+
+.imageNav{
+    width: 80%;
+}
+.imageNav img{
+    width: 150px;
+    height: 150px;
+}
+
+.navigationList{
+    display: flex;
+    align-items: center;
+}
+
+.listNav{
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+
+.listNav a{
+    text-decoration: none;
+    color: white;    
+}
