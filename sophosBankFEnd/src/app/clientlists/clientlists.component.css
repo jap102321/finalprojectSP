@@ -2,6 +2,23 @@
     display: flex;
     justify-content: center;
     margin-block-start: 1rem;
+    flex-direction: column;
+    
+}
+.button{
+    display: flex;
+    justify-content: flex-end;
+    margin-inline-end: .5rem;
+}
+.addClient{
+    display: inline-block;
+    height: 40px;
+    border-radius: 5px;
+    width: 100px;
+    background-color: #222222;
+    color: white;
+    border: none;
+    justify-content: center;
 }
 th,td{
     padding-inline: 16px;

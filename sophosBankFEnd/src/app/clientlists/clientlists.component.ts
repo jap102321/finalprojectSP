@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from '../models/cliente';
+import { Client } from '../models/client';
 import { ClientServiceService } from '../service/client-service.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-clientlists',
   templateUrl: './clientlists.component.html',
@@ -8,9 +12,9 @@ import { ClientServiceService } from '../service/client-service.service';
 })
 export class ClientlistsComponent implements OnInit{
 
-  clientes : Cliente[] = [];
+  clients : Client[] = [];
 
-  constructor(private clientService: ClientServiceService){
+  constructor(private toastr: ToastrService,private clientService: ClientServiceService,private router : Router){
 
   }
 
@@ -22,7 +26,7 @@ export class ClientlistsComponent implements OnInit{
   loadClient() : void{
     this.clientService.list().subscribe(
       data =>{
-        this.clientes = data;
+        this.clients = data;
       },
       err=>{
         console.log(err)
@@ -31,8 +35,14 @@ export class ClientlistsComponent implements OnInit{
   }
 
   delete(id?:number){
-
-    alert(`Borrando el cliente` + id)
+    if(id!=undefined){
+    this.clientService.delete(id).subscribe({
+      next:(res)=> this.toastr.success('Cliente eliminado', 'OK',{
+      }),
+      error: (err) => this.toastr.error('Error al eliminar, revisa sus datos', 'Ok',{
+      }),
+      complete: ()=> this.router.navigateByUrl("/clients")
+    })
   }
-
+ }
 }

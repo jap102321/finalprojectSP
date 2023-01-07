@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="form">
+        <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+            <div class="form-group">
+                <label for="name">Tipo de documento</label>
+                <!-- <input type="text" class="form-control" id="idType" name="idType" [(ngModel)]="idType" required> -->
+                <select name="idType" id="idType" [(ngModel)]="idType" style="display:block">
+                    <option value="CC">CC</option>
+                    <option value="CE">CE</option>
+                    <option value="PSP">PSP</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name"[(ngModel)]="name" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Apellido</label>
+                <input type="text" class="form-control" id="lastname" name="lastname"[(ngModel)]="lastname" required>
+            </div>
+            <div class="form-group">
+                <label for="name">N° Documento</label>
+                <input type="text" placeholder="Número Documento" class="form-control" id="document" name="document"[(ngModel)]="document" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Email</label>
+                <input type="email" class="form-control" id="email" name="email"[(ngModel)]="email" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Fecha de nacimiento</label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="birthDate" class="form-control" name="birthDate">
+                    <mat-hint>YYYY/MM/DD</mat-hint>
+                    <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+            </div>
+            <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">Crear</button>
+        </form>
+    </div>
+</div>
+<router-outlet></router-outlet>

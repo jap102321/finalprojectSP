@@ -15,19 +15,22 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let cliente of clientes">
-            <td>{{cliente.id}}</td>
-            <td>{{cliente.name}} {{cliente.lastname}}</td>
-            <td>{{cliente.idType}}</td>
-            <td>{{cliente.document}}</td>
-            <td>{{cliente.creationDate}}</td>
-            <td>{{cliente.updateDate}}</td>
-            <td>{{cliente.updateUser}}</td>
+        <tr *ngFor="let client of clients">
+            <td>{{client.id}}</td>
+            <td>{{client.name}} {{client.lastname}}</td>
+            <td>{{client.idType}}</td>
+            <td>{{client.document}}</td>
+            <td>{{client.creationDate}}</td>
+            <td>{{client.updateDate}}</td>
+            <td>{{client.updateUser}}</td>
             <td>
-            <button class="btn btn-outline-warning" routerLink="update/{{cliente.id}}">Editar</button>
-            <button class="btn btn-outline-danger" (click)="delete(cliente.id)" >Eliminar</button>    
+            <button class="btn btn-outline-warning" routerLink="update/{{client.id}}">Editar</button>
+            <button class="btn btn-outline-danger" (click)="delete(client.id)" >Eliminar</button>    
             </td>
         </tr>
         </tbody>
     </table>
+    <div class="button">
+        <button class="addClient" routerLink="create">Añadir cliente</button>
+    </div>
 </div>
