@@ -49,11 +49,12 @@ public class Client implements Serializable {
 
     }
 
-    public Client(String idType, String name, String lastname, Long document, String email, LocalDate birthDate, LocalDate creationDate) {
+    public Client(String idType, String name, String lastname, Long document, String email, LocalDate birthDate, String updateUser, LocalDate creationDate) {
         this.idType = idType;
         this.name = name;
         this.lastname = lastname;
         this.document = document;
+        this.updateUser = "admin";
         this.email = email;
         this.birthDate = birthDate;
         this.creationDate = creationDate;
@@ -64,7 +65,8 @@ public class Client implements Serializable {
         this.updateUser = updateUser;
     }
 
-
+    public Client(String idType, String name, String lastname, Long document, String email, LocalDate birthDate, LocalDate creationDate) {
+    }
 
 
     public String getIdType() {

@@ -16,8 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost/4200")
 @RequestMapping("/transaction")
+@CrossOrigin(origins = "http://localhost/4200")
 public class TransacController {
 
     @Autowired

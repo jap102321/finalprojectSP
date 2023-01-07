@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost/4200")
-@RequestMapping
+@RequestMapping("/accs")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class AccountController {
     @Autowired
     private AccountService accountService;
@@ -25,7 +26,7 @@ public class AccountController {
     private ClientService clientService;
 
 
-    @GetMapping("accounts/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<List<Account>> getByClient(@PathVariable("id") Long id){
         if(!accountService.existsById(id)){
             return new ResponseEntity(new Message("The account does not exists"), HttpStatus.NOT_FOUND);

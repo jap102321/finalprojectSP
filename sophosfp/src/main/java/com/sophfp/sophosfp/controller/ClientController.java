@@ -15,8 +15,8 @@ import java.time.Period;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost/4200")
 @RequestMapping
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClientController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ClientController {
     @GetMapping("/clientlist")
     public ResponseEntity<List<Client>> list(){
         List<Client> list = clientService.list();
-        return new ResponseEntity<List<Client>>(list, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/clientdetail/{id}")
@@ -47,7 +47,7 @@ public class ClientController {
         if(clientService.existsByDocument(clientDTO.getDocument()))
             return new ResponseEntity<>(new Message("The document is already registered"), HttpStatus.BAD_REQUEST);
 
-        Client client = new Client(clientDTO.getIdType(),clientDTO.getName(), clientDTO.getLastname(), clientDTO.getDocument(),clientDTO.getEmail(),clientDTO.getBirthDate(),clientDTO.getCreationDate());
+        Client client = new Client(clientDTO.getIdType(),clientDTO.getName(), clientDTO.getLastname(), clientDTO.getDocument(),clientDTO.getEmail(),clientDTO.getBirthDate(),clientDTO.getUpdateUser(),clientDTO.getCreationDate());
 
         int years = Period.between(clientDTO.getBirthDate(), clientDTO.getCreationDate()).getYears();
         if(years < 18)
@@ -66,10 +66,12 @@ public class ClientController {
             return new ResponseEntity<>(new Message("The update user is mandatory"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(clientDTO.getEmail()))
             return new ResponseEntity<>(new Message("The email is mandatory"), HttpStatus.BAD_REQUEST);
-
+        if(StringUtils.isBlank(clientDTO.getUpdateUser()))
+            return new ResponseEntity<>(new Message("The update user is mandatory"), HttpStatus.BAD_REQUEST);
 
         Client clientUpd = clientService.getOne(id).get();
         clientUpd.setUpdateDate(clientDTO.getUpdateDate());
+        clientUpd.setUpdateUser(clientDTO.getUpdateUser());
         clientUpd.setEmail(clientDTO.getEmail());
         clientService.save(clientUpd);
 

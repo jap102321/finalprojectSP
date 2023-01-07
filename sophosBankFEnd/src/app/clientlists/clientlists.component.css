@@ -1,0 +1,8 @@
+.clientList{
+    display: flex;
+    justify-content: center;
+    margin-block-start: 1rem;
+}
+th,td{
+    padding-inline: 16px;
+}
