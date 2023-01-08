@@ -9,7 +9,6 @@ export class Client{
     creationDate: Date;
     updateDate: Date;
     updateUser : string;
-
     constructor(idType : string, name : string, lastname : string,
         document:number, email:string, birthDate : Date, creationDate : Date,
         updateUser : string, updateDate : Date){

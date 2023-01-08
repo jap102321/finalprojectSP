@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/accs")
+@RequestMapping("/accounts")
 @CrossOrigin(origins = "http://localhost:4200")
 
 public class AccountController {
@@ -28,9 +28,6 @@ public class AccountController {
 
     @GetMapping("/{id}")
     public ResponseEntity<List<Account>> getByClient(@PathVariable("id") Long id){
-        if(!accountService.existsById(id)){
-            return new ResponseEntity(new Message("The client does not exists"), HttpStatus.NOT_FOUND);
-        }
         List<Account> accsByClient = accountService.findByClientId(id);
         return new ResponseEntity<>(accsByClient,HttpStatus.OK);
     }

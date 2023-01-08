@@ -24,9 +24,10 @@
             <td>{{client.updateDate}}</td>
             <td>{{client.updateUser}}</td>
             <td>
-            <button class="btn btn-outline-warning" routerLink="update/{{client.id}}">Editar</button>
-            <button class="btn btn-outline-danger" (click)="delete(client.id)" >Eliminar</button>    
+            <button class="btn " routerLink="update/{{client.id}}">Editar</button>
+            <button class="btn btn-delete" (click)="delete(client.id)" >Eliminar</button>    
             </td>
+            <td><button class="btn btn-accounts" routerLink="accounts/{{client.id}}">Gestionar</button></td>
         </tr>
         </tbody>
     </table>

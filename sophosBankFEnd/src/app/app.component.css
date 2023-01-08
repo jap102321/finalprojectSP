@@ -24,7 +24,7 @@
 .listNav{
     display: flex;
     list-style: none;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .listNav a{

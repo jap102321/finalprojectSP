@@ -70,9 +70,12 @@ public class ClientController {
             return new ResponseEntity<>(new Message("The update user is mandatory"), HttpStatus.BAD_REQUEST);
 
         Client clientUpd = clientService.getOne(id).get();
+        clientUpd.setName(clientDTO.getName());
+        clientUpd.setLastname(clientDTO.getLastname());
+        clientUpd.setEmail(clientDTO.getEmail());
+        clientUpd.setBirthDate(clientDTO.getBirthDate());
         clientUpd.setUpdateDate(clientDTO.getUpdateDate());
         clientUpd.setUpdateUser(clientDTO.getUpdateUser());
-        clientUpd.setEmail(clientDTO.getEmail());
         clientService.save(clientUpd);
 
         return new ResponseEntity<>(new Message("Client updated"), HttpStatus.OK);

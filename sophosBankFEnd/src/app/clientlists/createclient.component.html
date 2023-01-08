@@ -21,6 +21,7 @@
             <div class="form-group">
                 <label for="name">N° Documento</label>
                 <input type="text" placeholder="Número Documento" class="form-control" id="document" name="document"[(ngModel)]="document" required>
+                <p *ngIf="document"></p>
             </div>
             <div class="form-group">
                 <label for="name">Email</label>
