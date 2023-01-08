@@ -26,11 +26,13 @@ public class AccountController {
     private ClientService clientService;
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/accinfo/{id}")
     public ResponseEntity<List<Account>> getByClient(@PathVariable("id") Long id){
         List<Account> accsByClient = accountService.findByClientId(id);
         return new ResponseEntity<>(accsByClient,HttpStatus.OK);
     }
+
+
 
 
     @PostMapping("/addaccount")
@@ -46,7 +48,7 @@ public class AccountController {
         accountService.save(acc);
         return new ResponseEntity<>(new Message("Account created"), HttpStatus.CREATED);
     }
-    @PutMapping("updateacc/{id}")
+    @PutMapping("/updateacc/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody AccountDTO accountDTO){
         if(!accountService.existsById(id)){
             return new ResponseEntity<>(new Message("The account don't exist"), HttpStatus.BAD_REQUEST);

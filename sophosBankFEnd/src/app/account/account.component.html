@@ -1,1 +1,34 @@
-{{accounts | json}}
+
+<div class="accs" *ngFor="let accs of accounts" >
+    <div class="top">
+
+        <div class="holder">
+            <div class="name">
+              <label for="name">Titular</label>
+             <p id="name">{{clients.name}} {{clients.lastname}}</p>
+            </div>
+        </div>
+        <div class="accountN">
+            <label for="name">Numero de cuenta</label>
+            <p id="name">{{accs.accNumber}}</p>
+        </div>
+        <div class="accType" >
+            <label for="name">Tipo de cuenta</label>
+            <p id="name">{{accs.acc_type}}</p>
+        </div>
+        <div class="balance">
+            <label for="name">Saldo</label>
+            <p id="name">{{accs.balance}}</p>
+        </div>
+        <div class="accStatus">
+            <label for="name">Estado cuenta</label>
+            <p id="name">{{accs.acc_status}}</p>
+        </div>
+    </div>
+    <div class="buttons">
+        <button>inhabilitar</button>
+        <button>Depositar</button>
+        <button>Retirar</button>
+        <button>Transferencia</button>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 .bg{
     background:  url("../../assets/images/getty_543199181_99771.jpg") center ;
-    height: 561px;
+    height: 564px;
     overflow: hidden;
     
 }
@@ -20,7 +20,7 @@
 .bg h1{
     font-weight:bold;
     font-size: 70px;
-    margin-bottom: 1rem;
+    margin-bottom: .4rem;
     padding-inline-start: 2rem;
 }
 
