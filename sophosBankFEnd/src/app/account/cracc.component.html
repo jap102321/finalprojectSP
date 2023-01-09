@@ -3,7 +3,7 @@
         <form (ngSubmit)="onCreateAcc()" novalidate #f="ngForm">
             <div class="form-group">
                 <label for="id">ID Cliente</label>
-                <input type="text" class="form-control" id="id" name="client_id" [(ngModel)]="id">
+                <input type="number" class="form-control" id="id" name="client_id" [(ngModel)]="client.id">
             </div>
             <div class="form-group">
                 <label for="acc_type">Tipo de cuenta</label>

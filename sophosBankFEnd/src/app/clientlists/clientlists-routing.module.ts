@@ -10,7 +10,7 @@ const routes: Routes = [{ path: '', component: ClientlistsComponent },
 {path:'update/:id', component : UpdateclientComponent},
 {path:'create', component: CreateclientComponent},
 {path:'accounts/:id', component:AccountComponent},
-{path:'cracc', component: CraccComponent}
+{path:'cracc/:id', component: CraccComponent}
 ]
 
 

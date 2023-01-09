@@ -20,15 +20,15 @@
             <td>{{client.name}} {{client.lastname}}</td>
             <td>{{client.idType}}</td>
             <td>{{client.document}}</td>
-            <td>{{client.creationDate}}</td>
             <td>{{client.updateDate}}</td>
+            <td>{{client.creationDate}}</td>
             <td>{{client.updateUser}}</td>
             <td>
             <button class="btn " routerLink="update/{{client.id}}">Editar</button>
             <button class="btn btn-delete" (click)="delete(client.id)" >Eliminar</button>    
             </td>
             <td><button class="btn btn-accounts" routerLink="accounts/{{client.id}}">Gestionar</button>
-            <button class="btn btn-accounts" routerLink="cracc">Crear</button></td>
+            <button class="btn btn-accounts" routerLink="cracc/{{client.id}}">Crear</button></td>
         </tr>
         </tbody>
     </table>

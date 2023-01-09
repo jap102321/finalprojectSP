@@ -12,7 +12,7 @@ import { AccountserviceService } from '../service/accountservice.service';
   styleUrls: ['./cracc.component.css']
 })
 export class CraccComponent implements OnInit{
-  id : any = '';
+  client: any = '';
   accNumber : string = '';
   acc_type : string = '';
   balance : any = '';
@@ -20,29 +20,42 @@ export class CraccComponent implements OnInit{
   updated_at : Date = new Date();
   acc_status: string = '';
 
-  acc : Accounts = new Accounts(parseInt(this.id), this.accNumber,this.acc_type,this.balance,this.created_at,this.updated_at,this.acc_status);
+
+  
+  acc : Accounts = new Accounts(this.client, this.accNumber,this.acc_type,this.balance,this.created_at,this.updated_at,this.acc_status);
 
   constructor(private activatedRoute : ActivatedRoute,private toastr : ToastrService, private clientService : ClientServiceService, private accountService : AccountserviceService, private router : Router ){
 
   }
 
 ngOnInit(){
+  const id = this.activatedRoute.snapshot.params.id;
+  this.loadClient(id)
 }
 
+loadClient(id:number) : void{
+  this.clientService.detail(id).subscribe(
+    data =>{
+      this.client = data;
+    },
+    err=>{
+      console.log(err)
+    }
+  )
+}
 
 onCreateAcc(){
-   let account : Accounts = new Accounts(parseInt(this.id), this.accNumber,this.acc_type,this.balance,this.created_at,this.updated_at,this.acc_status)
+     let account : Accounts = new Accounts(this.client, this.accNumber,this.acc_type,this.balance,this.created_at,this.updated_at,this.acc_status)
 
-   this.accountService.save(account).subscribe({
-     next:(res)=> this.toastr.success('Cuenta añadida', 'OK',{
-       timeOut:3000
-     }),
-     error: (err) => this.toastr.error('Error al crear la cuenta, revisa sus datos', 'Ok',{
-       timeOut:3000
-     }),
-     complete: ()=> this.router.navigateByUrl("/clients")
-   })
+     this.accountService.save(account).subscribe({
+       next:(res)=> this.toastr.success('Cuenta añadida', 'OK',{
+         timeOut:3000
+       }),
+       error: (err) => this.toastr.error('Error al crear la cuenta, revisa sus datos', 'Ok',{
+         timeOut:3000
+       }),
+       complete: ()=> this.router.navigateByUrl("/clients")
+     })
   console.log(this.acc)
-}
-
+  }
 }

@@ -20,7 +20,7 @@ updateUser : string = '';
 updateDate : Date = new Date();
 
 
-client : Client = new Client(this.idType, this.name,this.lastname,this.document,this.email,this.birthDate,this.creationDate,this.updateUser);
+client : Client = new Client(this.idType, this.name,this.lastname,this.document,this.email,this.birthDate,this.creationDate,this.updateDate,this.updateUser);
 constructor(private toastr: ToastrService ,private clientService : ClientServiceService,private router : Router){
 }
 
@@ -30,7 +30,7 @@ ngOnInit(){
 
 
  onCreate(): void{
-    let client : Client = new Client(this.idType, this.name,this.lastname,this.document,this.email,this.birthDate,this.creationDate,this.updateUser);
+    let client : Client = new Client(this.idType, this.name,this.lastname,this.document,this.email,this.birthDate,this.creationDate,this.updateDate,this.updateUser);
 
      this.clientService.save(client).subscribe({
        next:(res)=> this.toastr.success('Cliente añadido', 'OK',{
