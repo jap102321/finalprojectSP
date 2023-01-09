@@ -7,7 +7,6 @@ import { CraccComponent } from './cracc.component';
 
 @NgModule({
   declarations: [
-    CraccComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,36 @@
+.wrapper{
+    max-inline-size: 800px;
+    margin: 0 auto;
+}
+.accs{
+    max-inline-size: 700px;
+    margin-block-start: 1.5rem;
+    border: 1px solid black;
+    margin-block-end: 1.5rem;
+}
+
+
+.top{
+    padding: 1rem;
+}
+
+.buttons{
+margin-inline: .5rem;
+display: flex;
+justify-content: space-between;
+margin-block-end: .5rem;
+}
+
+.buttons button{
+    border: none;
+    padding: 1rem;
+    background-color: #009c8c;
+    border-radius: 5px;
+    color: black;
+    margin-inline: .5rem;    
+}
+
+.buttons button:hover{
+    transform: scale(1.1);
+    transition: .3s;
+}

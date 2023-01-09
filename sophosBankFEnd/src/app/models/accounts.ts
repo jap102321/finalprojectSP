@@ -1,9 +1,8 @@
 import { Client } from "./client";
 
 export class Accounts{
-    id?: number;
     acc_id? : number;
-    client : Client;
+    id:number;
     accNumber : string;
     acc_type : string;
     balance : number;
@@ -11,11 +10,9 @@ export class Accounts{
     updated_at : Date;
     acc_status: string;
 
-    constructor(acc_id : number, client: Client, accNumber : string,acc_type : string,
-        balance : number, created_at: Date, updated_at: Date, acc_status: string){
-         
-            this.acc_id = acc_id;
-            this.client = client;
+    constructor(client: number, accNumber : string,acc_type : string,
+        balance : number, created_at: Date, updated_at: Date, acc_status: string){         
+            this.id = client;
             this.accNumber = accNumber;
             this.acc_type = acc_type;
             this.balance = balance;

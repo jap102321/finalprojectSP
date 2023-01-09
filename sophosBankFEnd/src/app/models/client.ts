@@ -11,7 +11,7 @@ export class Client{
     updateUser : string;
     constructor(idType : string, name : string, lastname : string,
         document:number, email:string, birthDate : Date, creationDate : Date,
-        updateUser : string, updateDate : Date){
+        updateUser : string){
             this.idType = idType;
             this.name = name;
             this.lastname = lastname;
@@ -19,7 +19,6 @@ export class Client{
             this.email = email;
             this.birthDate = birthDate;
             this.creationDate = creationDate;
-            this.updateDate = updateDate;
             this.updateUser = updateUser;
     }
 }

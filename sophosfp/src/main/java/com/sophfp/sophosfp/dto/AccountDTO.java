@@ -18,10 +18,10 @@ public class AccountDTO {
     public AccountDTO(){
 
     }
-    public AccountDTO(Client client, String acc_type, Double balance, String acc_status) {
+    public AccountDTO(Client client, String acc_type, String acc_status) {
         this.client = client;
         this.acc_type = acc_type;
-        this.balance = balance;
+        this.balance = 0.0;
         this.acc_status = acc_status;
     }
 
