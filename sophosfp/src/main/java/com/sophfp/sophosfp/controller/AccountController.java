@@ -43,6 +43,7 @@ public class AccountController {
         //Generate Acc Number
         String setAccNumber = genAccNum.genAccNum(accountDTO.getAcc_type());
 
+
         Account acc = new Account(accountDTO.getClient(),accountDTO.getAcc_type(),setAccNumber, accountDTO.getBalance(),
                 accountDTO.getCreated_at(),accountDTO.getAcc_status());
         accountService.save(acc);

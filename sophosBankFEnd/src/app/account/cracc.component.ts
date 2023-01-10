@@ -2,7 +2,6 @@ import { Component ,OnInit} from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Accounts } from '../models/accounts';
-import { Client } from '../models/client';
 import { ClientServiceService } from '../service/client-service.service';
 import { AccountserviceService } from '../service/accountservice.service';
 

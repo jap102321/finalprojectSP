@@ -5,6 +5,7 @@ import { Accounts } from '../models/accounts';
 import { Client } from '../models/client';
 import { AccountserviceService } from '../service/accountservice.service';
 import { ClientServiceService } from '../service/client-service.service';
+import { CreatetransacComponent } from '../transactions/createtransac.component';
 
 
 @Component({
@@ -30,6 +31,10 @@ export class AccountComponent implements OnInit{
     const id = this.activatedRoute.snapshot.params.id;
     this.loadAccount(id);
     this.loadClient(id);
+  }
+
+  goToTransac(){
+    this.router.navigate(['/createtransac'])
   }
 
   loadAccount(id:number): void{

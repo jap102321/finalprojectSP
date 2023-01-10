@@ -8,10 +8,10 @@ public class genAccNum {
         String bank = "0123456789";
         int length = 8;
         StringBuilder builder = new StringBuilder(length);
-        if(acc_type.equalsIgnoreCase("savings")){
+        if(acc_type.equalsIgnoreCase("ahorros")){
             accNumber = "46";
             builder.append(accNumber);
-        } else if (acc_type.equalsIgnoreCase("checking")) {
+        } else if (acc_type.equalsIgnoreCase("corriente")) {
             accNumber = "23";
             builder.append(accNumber);
         }

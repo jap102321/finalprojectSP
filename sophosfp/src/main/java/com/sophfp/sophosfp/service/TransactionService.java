@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +18,7 @@ public class TransactionService {
     public Optional<Transaction> getOne(Account account){
         return transacRepository.findByAccount(account);
     }
+
 
     public void save(Transaction transaction){
         transacRepository.save(transaction);

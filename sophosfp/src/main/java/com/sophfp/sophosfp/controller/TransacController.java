@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/transaction")
 @CrossOrigin(origins = "http://localhost/4200")
@@ -26,8 +28,12 @@ public class TransacController {
     AccountService accountService;
     @Autowired
     AccountRepository accountRepository;
+
+
+
     @PostMapping("/inacc")
-    public ResponseEntity<?> transac(@RequestBody TransacDTO transacDTO){
+    public ResponseEntity<?> transac(@RequestBody TransacDTO transacDTO,
+                                     @RequestBody AccountDTO accountDTO){
         Long acc_id = transacDTO.getAccount().getAcc_id();
         if(StringUtils.isBlank(transacDTO.getTransac_type()))
             return new ResponseEntity<>(new Message("The transaction type is mandatory"), HttpStatus.BAD_REQUEST);
@@ -47,6 +53,12 @@ public class TransacController {
             accountUpd.setBalance(addedValue);
 
         } else if (transacDTO.getTransac_type().equalsIgnoreCase("withdraw")) {
+            if(accountDTO.getAcc_type().equalsIgnoreCase("corriente") && accountDTO.getBalance() <= -3000000){
+                return new ResponseEntity<>(new Message("You don't have enough balance"), HttpStatus.BAD_REQUEST);
+            } else if (accountDTO.getAcc_type().equalsIgnoreCase("ahorros") && accountDTO.getBalance()== 0) {
+                return new ResponseEntity<>(new Message("You don't have enough balance"), HttpStatus.BAD_REQUEST);
+            }
+
             double addedValue = currentBalance - amountTransac ;
             accountUpd.setBalance(addedValue);
 

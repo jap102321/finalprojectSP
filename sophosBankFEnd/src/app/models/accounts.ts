@@ -3,7 +3,6 @@ import { Client } from "./client";
 export class Accounts{
     acc_id? : number;
     client:Client;
-    client_id: number;
     accNumber : string;
     acc_type : string;
     balance : number;
