@@ -1,1 +1,25 @@
-<p>cretransac works!</p>
+<div class="container">
+    <div class="form">
+        <form (ngSubmit)="onTransac()" novalidate #f="ngForm">
+            <div class="form-group">
+                <label for="acc_id">ID Cuenta</label>
+                <input type="number" class="form-control" id="acc_id" name="acc_id" [(ngModel)]="account.accid">
+            </div>
+            <div class="form-group">
+                <label for="transac_type">Tipo de transacción</label>
+                <!-- <input type="text" class="form-control" id="idType" name="idType" [(ngModel)]="idType" required> -->
+                <select name="transac_type" id="transac_type" [(ngModel)]="transac_type" style="display:block">
+                    <option value="withdraw">Withdraw</option>
+                    <option value="deposit">Deposit</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="balance">Cantidad de la transacción</label>
+                <input type="number" placeholder="Si el cliente no hace abono, dejar en 0" class="form-control" id="balance" name="balance" [(ngModel)]="amount">
+            </div>
+            <button class="btn btn-outline-success btn-block" [disabled]="!f.valid">Crear</button>
+        </form>
+    </div>
+</div>
+<router-outlet></router-outlet>

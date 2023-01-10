@@ -31,12 +31,15 @@
                 <button >Inhabilitar</button>
             </div>
             <div class="buttonsTransac">
-            <button routerLink="/cretra/{{accs.acc_id}}">Realizar transacción</button>
+                <button routerLink="/cretra/{{accs.accid}}">Realizar transacción</button>
+                <button routerLink="/listransac/{{accs.accid}}">Ver historial de transacciones</button>
             </div>
             
         </div>
         <div class="transaction">
             <div id="transac">
+                {{accs.transaction}}
+                sadas
             </div>
         </div>
     </div>

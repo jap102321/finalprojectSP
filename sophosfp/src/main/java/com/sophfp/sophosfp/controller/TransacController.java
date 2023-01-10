@@ -19,7 +19,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/transaction")
-@CrossOrigin(origins = "http://localhost/4200")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class TransacController {
 
     @Autowired
@@ -30,11 +31,18 @@ public class TransacController {
     AccountRepository accountRepository;
 
 
+    @GetMapping("/transaclist/{id}")
+    public ResponseEntity<List<Transaction>> getOne(@PathVariable("id") Long id ){
+
+        List<Transaction> translist = transactionService.getOne(id);
+
+        return new ResponseEntity<>(translist, HttpStatus.OK);
+    }
 
     @PostMapping("/inacc")
-    public ResponseEntity<?> transac(@RequestBody TransacDTO transacDTO,
-                                     @RequestBody AccountDTO accountDTO){
-        Long acc_id = transacDTO.getAccount().getAcc_id();
+    public ResponseEntity<?> transac(@RequestBody TransacDTO transacDTO
+                                    ){
+        Long acc_id = transacDTO.getAccount().getAccid();
         if(StringUtils.isBlank(transacDTO.getTransac_type()))
             return new ResponseEntity<>(new Message("The transaction type is mandatory"), HttpStatus.BAD_REQUEST);
         if(transacDTO.getAccount().equals("")){
@@ -53,15 +61,13 @@ public class TransacController {
             accountUpd.setBalance(addedValue);
 
         } else if (transacDTO.getTransac_type().equalsIgnoreCase("withdraw")) {
-            if(accountDTO.getAcc_type().equalsIgnoreCase("corriente") && accountDTO.getBalance() <= -3000000){
+            if(transacDTO.getAccount().getAcc_type().equalsIgnoreCase("corriente") && transacDTO.getAccount().getBalance() <= -3000000){
                 return new ResponseEntity<>(new Message("You don't have enough balance"), HttpStatus.BAD_REQUEST);
-            } else if (accountDTO.getAcc_type().equalsIgnoreCase("ahorros") && accountDTO.getBalance()== 0) {
+            } else if (transacDTO.getAccount().getAcc_type().equalsIgnoreCase("ahorros") && transacDTO.getAccount().getBalance() <= 0) {
                 return new ResponseEntity<>(new Message("You don't have enough balance"), HttpStatus.BAD_REQUEST);
             }
-
             double addedValue = currentBalance - amountTransac ;
             accountUpd.setBalance(addedValue);
-
         }
 
         accountService.save(accountUpd);
@@ -70,25 +76,6 @@ public class TransacController {
        return new ResponseEntity<>(new Message("Transaction successful"), HttpStatus.OK);
     }
 
-    @PostMapping("/withdraw")
-    public ResponseEntity transacWdraw(@RequestBody TransacDTO transacDTO){
-        Long acc_id = transacDTO.getAccount().getAcc_id();
-        if(StringUtils.isBlank(transacDTO.getTransac_type()))
-            return new ResponseEntity<>(new Message("The transaction type is mandatory"), HttpStatus.BAD_REQUEST);
-        if(transacDTO.getAccount().equals("")){
-            return new ResponseEntity<>(new Message("You should add an account"), HttpStatus.BAD_REQUEST);
-        }
-
-        Account accountUpd = accountService.getOne(acc_id).get();
-        Transaction transaction = new Transaction(transacDTO.getAccount(),transacDTO.getTransac_type(),transacDTO.getAmount(),transacDTO.getTransac_date());
-        double currentBalance= accountUpd.getBalance();
-        double amountTransac = transacDTO.getAmount();
-                accountService.save(accountUpd);
-        transactionService.save(transaction);
-
-
-        return new ResponseEntity<>(new Message("Withdraw successful"), HttpStatus.OK);
-    }
 
   /*  @PostMapping("/transfer")
     public ResponseEntity transacTransfer(@RequestBody TransacDTO transacDTO){

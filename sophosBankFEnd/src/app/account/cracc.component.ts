@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Accounts } from '../models/accounts';
 import { ClientServiceService } from '../service/client-service.service';
 import { AccountserviceService } from '../service/accountservice.service';
+import { Transaction } from '../models/transaction';
 
 @Component({
   selector: 'app-cracc',
@@ -18,10 +19,11 @@ export class CraccComponent implements OnInit{
   created_at: Date = new Date();
   updated_at : Date = new Date();
   acc_status: string = '';
+  transaction : any='';
 
 
   
-  acc : Accounts = new Accounts(this.client, this.accNumber,this.acc_type,this.balance,this.created_at,this.updated_at,this.acc_status);
+  acc : Accounts = new Accounts(this.client, this.accNumber,this.acc_type,this.balance,this.created_at,this.updated_at,this.acc_status, this.transaction);
 
   constructor(private activatedRoute : ActivatedRoute,private toastr : ToastrService, private clientService : ClientServiceService, private accountService : AccountserviceService, private router : Router ){
 
@@ -44,7 +46,7 @@ loadClient(id:number) : void{
 }
 
 onCreateAcc(){
-     let account : Accounts = new Accounts(this.client, this.accNumber,this.acc_type,this.balance,this.created_at,this.updated_at,this.acc_status)
+     let account : Accounts = new Accounts(this.client, this.accNumber,this.acc_type,this.balance,this.created_at,this.updated_at,this.acc_status, this.transaction)
 
      this.accountService.save(account).subscribe({
        next:(res)=> this.toastr.success('Cuenta añadida', 'OK',{

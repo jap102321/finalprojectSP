@@ -19,8 +19,13 @@ export class AccountserviceService {
     return this.httpClient.get<Accounts[]>(this.accURL + `accinfo/${id}`)
   }
 
+  public detailAcc(acc_id:number): Observable<Accounts>{
+    return this.httpClient.get<Accounts>(this.accURL + `accdetail/${acc_id}`)
+  }
+
   public save(account : Accounts): Observable<any>{
     return this.httpClient.post<any>(this.accURL + `addaccount`, account)
   }
+
 
 }

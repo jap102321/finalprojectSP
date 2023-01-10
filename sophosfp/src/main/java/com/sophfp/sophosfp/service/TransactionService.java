@@ -15,8 +15,8 @@ import java.util.Optional;
 public class TransactionService {
     @Autowired
     private TransacRepository transacRepository;
-    public Optional<Transaction> getOne(Account account){
-        return transacRepository.findByAccount(account);
+    public List<Transaction> getOne(Long id){
+        return transacRepository.findByAccountAccid(id);
     }
 
 

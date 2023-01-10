@@ -9,11 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TransacRepository extends JpaRepository<Transaction, String> {
+public interface TransacRepository extends JpaRepository<Transaction, Long> {
 
 
-    Optional<Transaction> findByAccount(Account account);
-
+    List<Transaction> findByAccountAccid(Long id);
 
 
 }

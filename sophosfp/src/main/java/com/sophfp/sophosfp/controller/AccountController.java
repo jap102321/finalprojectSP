@@ -4,6 +4,7 @@ import com.sophfp.sophosfp.dto.AccountDTO;
 import com.sophfp.sophosfp.dto.Message;
 import com.sophfp.sophosfp.dto.genAccNum;
 import com.sophfp.sophosfp.entity.Account;
+import com.sophfp.sophosfp.entity.Client;
 import com.sophfp.sophosfp.service.AccountService;
 import com.sophfp.sophosfp.service.ClientService;
 import org.apache.commons.lang3.StringUtils;
@@ -32,8 +33,15 @@ public class AccountController {
         return new ResponseEntity<>(accsByClient,HttpStatus.OK);
     }
 
+    @GetMapping("/accdetail/{id}")
+    public ResponseEntity<Account> getById(@PathVariable("id") long acc_id){
+        if(!accountService.existsById(acc_id)){
+            return new ResponseEntity(new Message("It does not exist"),HttpStatus.NOT_FOUND);
+        }
 
-
+        Account account = accountService.getOne(acc_id).get();
+        return new ResponseEntity<Account>(account,HttpStatus.OK);
+    }
 
     @PostMapping("/addaccount")
     public ResponseEntity<?> create(@RequestBody AccountDTO accountDTO){

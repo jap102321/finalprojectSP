@@ -15,7 +15,7 @@ public class Account {
     @Id
     @Column(name = "ACCOUNT_ID")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long acc_id;
+    private Long accid;
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="CLIENT_ID")
     private Client client;
@@ -55,13 +55,14 @@ public class Account {
         this.updated_at = updated_at;
     }
 
-    public Long getAcc_id() {
-        return acc_id;
+    public Long getAccid() {
+        return accid;
     }
 
-    public void setAcc_id(Long acc_id) {
-        this.acc_id = acc_id;
+    public void setAccid(Long accid) {
+        this.accid = accid;
     }
+
     @JsonBackReference
     public Client getClient() {
         return client;

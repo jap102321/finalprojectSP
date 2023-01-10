@@ -5,7 +5,6 @@ import { Accounts } from '../models/accounts';
 import { Client } from '../models/client';
 import { AccountserviceService } from '../service/accountservice.service';
 import { ClientServiceService } from '../service/client-service.service';
-import { CreatetransacComponent } from '../transactions/createtransac.component';
 
 
 @Component({
