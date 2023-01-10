@@ -18,7 +18,7 @@
             </div>
             <div class="balance">
                 <label for="name">Saldo</label>
-                <p id="name">{{accs.balance}}</p>
+                <p id="name"> $ {{accs.balance}}</p>
             </div>
             <div class="accStatus">
                 <label for="name">Estado cuenta</label>
@@ -29,18 +29,13 @@
         <div class="buttons">
             <div class="buttonsAccStatus">
                 <button >Inhabilitar</button>
+                <button> Cancelar </button>
             </div>
             <div class="buttonsTransac">
                 <button routerLink="/cretra/{{accs.accid}}">Realizar transacción</button>
-                <button routerLink="/listransac/{{accs.accid}}">Ver historial de transacciones</button>
+                <button routerLink="/transactions/{{accs.accid}}">Ver historial de transacciones</button>
             </div>
             
-        </div>
-        <div class="transaction">
-            <div id="transac">
-                {{accs.transaction}}
-                sadas
-            </div>
         </div>
     </div>
     

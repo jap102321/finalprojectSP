@@ -1,0 +1,21 @@
+.devInfo{
+    display: flex;
+    max-width: 400px;
+    margin-block-start: 1rem;
+}
+
+
+.devInfoInside {
+    display: flex;
+    align-items: center;
+    gap: .5px;
+    margin-inline-start: 1rem;
+}
+.devInfoInside p{
+    display: flex;
+    flex-direction: column;
+}
+a{
+    text-decoration: none;
+    color: currentColor;
+}
