@@ -23,16 +23,16 @@
             <div class="accStatus">
                 <label for="name">Estado cuenta</label>
                 <p id="name">{{accs.acc_status}}</p>
+
             </div>
         </div>
         
         <div class="buttons">
             <div class="buttonsAccStatus">
-                <button >Inhabilitar</button>
-                <button> Cancelar </button>
+                <button routerLink="/updacc/{{accs.accid}}">Cambiar estado</button>
             </div>
             <div class="buttonsTransac">
-                <button routerLink="/cretra/{{accs.accid}}">Realizar transacción</button>
+                <button  *ngIf="isUsable" routerLink="/cretra/{{accs.accid}}">Realizar transacción</button>
                 <button routerLink="/transactions/{{accs.accid}}">Ver historial de transacciones</button>
             </div>
             

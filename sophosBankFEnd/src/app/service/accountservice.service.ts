@@ -27,5 +27,8 @@ export class AccountserviceService {
     return this.httpClient.post<any>(this.accURL + `addaccount`, account)
   }
 
+  public updateAcc(acc_id: number, account: Accounts): Observable<any>{
+    return this.httpClient.put<any>(this.accURL + `updateacc/${acc_id}`, account);
+  }
 
 }

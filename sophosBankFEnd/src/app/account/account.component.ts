@@ -1,4 +1,5 @@
 import { Component,Inject,OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Accounts } from '../models/accounts';
@@ -15,11 +16,10 @@ import { ClientServiceService } from '../service/client-service.service';
 
 export class AccountComponent implements OnInit{
   accounts : Accounts[] = [];
-  clients : Client = null;
+  clients : any = '';
   id: number ;
-
-  
-
+  account : any = '';
+  isUsable : boolean = true
   constructor(private activatedRoute : ActivatedRoute,private tostr: ToastrService, private accountService : AccountserviceService, private router : Router,private clientService : ClientServiceService){
 
   }
@@ -30,6 +30,7 @@ export class AccountComponent implements OnInit{
     const id = this.activatedRoute.snapshot.params.id;
     this.loadAccount(id);
     this.loadClient(id);
+    this.accDetails(id);
   }
 
   goToTransac(){
@@ -49,10 +50,35 @@ export class AccountComponent implements OnInit{
       data=>{
         this.clients = data
       },
+    )
+  }
+
+  accDetails(id:number){
+    this.accountService.detailAcc(id).subscribe(
+      data=>{
+        this.account = data
+      },
+      err=>{
+          console.log(err)
+      }
+    )
+  }
+
+  workingButton(){
+    if(this.account.acc_status === "inactive"){
+        this.isUsable = false
+    }
+  }
+  updateAcc(id:number, account : Accounts){
+    this.accountService.updateAcc(id, account).subscribe(
+      data=>{
+        this.accounts = data
+      },
       err=>{
         console.log(err)
       }
     )
   }
+  
 
 }

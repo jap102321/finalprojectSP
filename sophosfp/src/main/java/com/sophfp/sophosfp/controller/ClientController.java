@@ -74,8 +74,8 @@ public class ClientController {
         clientUpd.setLastname(clientDTO.getLastname());
         clientUpd.setEmail(clientDTO.getEmail());
         clientUpd.setBirthDate(clientDTO.getBirthDate());
-        clientUpd.setUpdateDate(clientDTO.getUpdateDate());
         clientUpd.setUpdateUser(clientDTO.getUpdateUser());
+        clientUpd.setUpdateDate((clientDTO.getUpdateDate()));
         clientService.save(clientUpd);
 
         return new ResponseEntity<>(new Message("Client updated"), HttpStatus.OK);

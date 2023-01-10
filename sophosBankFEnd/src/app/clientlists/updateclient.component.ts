@@ -11,7 +11,7 @@ import { ClientServiceService } from '../service/client-service.service';
 })
 export class UpdateclientComponent {
 
-  client: Client = null ;
+  client: any = '' ;
 
   constructor(
     private clientService : ClientServiceService,
@@ -24,20 +24,23 @@ export class UpdateclientComponent {
   }
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.params.id;
-    this.clientService.detail(id).subscribe(
-      data => {
-        this.client = data;
-      },
-      err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000,  positionClass: 'toast-top-center',
-        });
-        this.router.navigate(['/clients']);
-      }
-    );
+  const id = this.activatedRoute.snapshot.params.id;
+  this.detailClt(id)  
   }
 
+  detailClt(id:number){
+  this.clientService.detail(id).subscribe(
+    data => {
+      this.client = data;
+    },
+    err => {
+      this.toastr.error(err.error.mensaje, 'Fail', {
+        timeOut: 3000,  positionClass: 'toast-top-center',
+      });
+      this.router.navigate(['/clients']);
+    }
+  );
+}
   onUpdate(): void {
     const id = this.activatedRoute.snapshot.params.id;
     this.clientService.update(id, this.client).subscribe(
@@ -45,7 +48,7 @@ export class UpdateclientComponent {
         this.toastr.success('Producto Actualizado', 'OK', {
           timeOut: 3000, positionClass: 'toast-top-center'
         });
-        this.router.navigate(['/clients']);
+        this.router.navigate(['/accounts']);
       },
       err => {
         this.toastr.error(err.error.mensaje, 'Fail', {
@@ -53,5 +56,6 @@ export class UpdateclientComponent {
         });
       }
     );
+    console.log(this.client.updateDate)
   }
 }

@@ -16,14 +16,14 @@ export class CraccComponent implements OnInit{
   accNumber : string = '';
   acc_type : string = '';
   balance : any = '';
-  created_at: Date = new Date();
-  updated_at : Date = new Date();
+  created_at: any = '';
+  updated_at : any = '';
   acc_status: string = '';
   transaction : any='';
 
 
   
-  acc : Accounts = new Accounts(this.client, this.accNumber,this.acc_type,this.balance,this.created_at,this.updated_at,this.acc_status, this.transaction);
+  acc : Accounts = new Accounts(this.client, this.accNumber,this.acc_type,this.balance,this.updated_at,this.acc_status, this.transaction);
 
   constructor(private activatedRoute : ActivatedRoute,private toastr : ToastrService, private clientService : ClientServiceService, private accountService : AccountserviceService, private router : Router ){
 
@@ -46,7 +46,7 @@ loadClient(id:number) : void{
 }
 
 onCreateAcc(){
-     let account : Accounts = new Accounts(this.client, this.accNumber,this.acc_type,this.balance,this.created_at,this.updated_at,this.acc_status, this.transaction)
+     let account : Accounts = new Accounts(this.client, this.accNumber,this.acc_type,this.balance,this.updated_at,this.acc_status, this.transaction)
 
      this.accountService.save(account).subscribe({
        next:(res)=> this.toastr.success('Cuenta añadida', 'OK',{

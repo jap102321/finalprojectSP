@@ -7,6 +7,7 @@ const routes: Routes = [
  { path: 'transactions/:id', loadChildren: () => import('./transactions/transactions.module').then(m => m.TransactionsModule) },
  { path: 'devinfo', loadChildren: () => import('./devinfo/devinfo.module').then(m => m.DevinfoModule) },
  { path: 'cretra/:id', loadChildren: () => import('./transactions/cretransac.module').then(m => m.CretransacModule) },
+ { path: 'updacc/:id', loadChildren: () => import('./account/updacc.module').then(m => m.UpdaccModule) },
 ];
 
 @NgModule({

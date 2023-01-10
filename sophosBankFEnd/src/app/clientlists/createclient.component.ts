@@ -15,9 +15,9 @@ lastname : string = '';
 document: any = '';
 birthDate: Date = new Date();
 creationDate: Date = new Date();
+updateDate : Date = new Date();
 email : string = '';
 updateUser : string = '';
-updateDate : Date = new Date();
 
 
 client : Client = new Client(this.idType, this.name,this.lastname,this.document,this.email,this.birthDate,this.creationDate,this.updateDate,this.updateUser);

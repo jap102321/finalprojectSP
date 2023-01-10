@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {animation} from '@angular/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -11,25 +7,24 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import { UpdaccRoutingModule } from './updacc-routing.module';
+import { UpdaccComponent } from './updacc.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
+    UpdaccComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    CommonModule,
+    UpdaccRoutingModule,
+    ToastrModule,
     HttpClientModule,
     FormsModule,
     NgbModule,
     MatButtonModule,
     MatDialogModule,
     MatInputModule
-    
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  ]
 })
-export class AppModule { }
+export class UpdaccModule { }
