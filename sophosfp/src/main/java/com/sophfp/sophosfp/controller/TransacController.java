@@ -49,7 +49,8 @@ public class TransacController {
             return new ResponseEntity<>(new Message("You should add an account"), HttpStatus.BAD_REQUEST);
         }
         Account accountUpd = accountService.getOne(acc_id).get();
-        Transaction transaction = new Transaction(transacDTO.getAccount(),transacDTO.getTransac_type(),transacDTO.getAmount(),transacDTO.getTransac_date());
+        Transaction transaction = new Transaction(transacDTO.getAccount(),transacDTO.getTransac_type(),
+                transacDTO.getAmount(),transacDTO.getTransac_date());
 
         double currentBalance= accountUpd.getBalance();
         double amountTransac = transacDTO.getAmount();
@@ -60,10 +61,14 @@ public class TransacController {
             double addedValue = currentBalance + amountTransac ;
             accountUpd.setBalance(addedValue);
 
-        } else if (transacDTO.getTransac_type().equalsIgnoreCase("withdraw")) {
-            if(transacDTO.getAccount().getAcc_type().equalsIgnoreCase("corriente") && transacDTO.getAccount().getBalance() <= -3000000){
+        }
+
+        if (transacDTO.getTransac_type().equalsIgnoreCase("withdraw")) {
+            if(transacDTO.getAccount().getAcc_type().equalsIgnoreCase("corriente")
+                    && transacDTO.getAccount().getBalance() <= -3000000){
                 return new ResponseEntity<>(new Message("You don't have enough balance"), HttpStatus.BAD_REQUEST);
-            } else if (transacDTO.getAccount().getAcc_type().equalsIgnoreCase("ahorros") && transacDTO.getAccount().getBalance() <= 0) {
+            } else if (transacDTO.getAccount().getAcc_type().equalsIgnoreCase("ahorros") &&
+                    transacDTO.getAccount().getBalance() <= 0) {
                 return new ResponseEntity<>(new Message("You don't have enough balance"), HttpStatus.BAD_REQUEST);
             }
             double addedValue = currentBalance - amountTransac ;
@@ -77,18 +82,5 @@ public class TransacController {
     }
 
 
-  /*  @PostMapping("/transfer")
-    public ResponseEntity transacTransfer(@RequestBody TransacDTO transacDTO){
-        Long acc_id = transacDTO.getAccount().getAcc_id();
-        if(StringUtils.isBlank(transacDTO.getTransac_type()))
-            return new ResponseEntity<>(new Message("The transaction type is mandatory"), HttpStatus.BAD_REQUEST);
-        if(transacDTO.getAccount().equals("")){
-            return new ResponseEntity<>(new Message("You should add an account"), HttpStatus.BAD_REQUEST);
-        }
 
-        Account accountUpd = accountService.getOne(acc_id).get();
-
-        String reciev_acc = accountUpd.getAcc_number();
-
-    }*/
 }

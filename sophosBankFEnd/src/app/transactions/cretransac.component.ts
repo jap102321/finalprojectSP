@@ -53,18 +53,20 @@ loadClient(id:number) : void{
 }
 
 onTransac(){
+  const acc_id = this.activatedRoute.snapshot.params.id;
   let transac: Transaction = new Transaction(this.account, this.transac_type, this.amount, this.transac_date)
-   this.transacService.transac(transac).subscribe({
-     next:(res)=> this.toastr.success('Transacción exitosa', 'OK',{
-       timeOut:3000
-     }),
-     error: (err) => this.toastr.error('Error al realizar la transacción', 'Ok',{
-       timeOut:3000
-     }),
-     complete: ()=> this.router.navigateByUrl(`/clients/accounts/${this.client.id}`)
-   })
+   this.transacService.transac(transac).subscribe(
+    data => {
+      this.toastr.success('Producto Actualizado', 'OK', {
+        timeOut: 3000, positionClass: 'toast-top-center'
+      });
+      this.router.navigate(['/clients/accounts', acc_id]);
+    },
+    err => {
+      this.toastr.error(err.error.mensaje, 'Fail', {
+        timeOut: 3000,  positionClass: 'toast-top-center',
+      });
+    })
 
-}  
-
-
+  }  
 }

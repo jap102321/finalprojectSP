@@ -47,11 +47,14 @@ public class ClientController {
         if(clientService.existsByDocument(clientDTO.getDocument()))
             return new ResponseEntity<>(new Message("The document is already registered"), HttpStatus.BAD_REQUEST);
 
-        Client client = new Client(clientDTO.getIdType(),clientDTO.getName(), clientDTO.getLastname(), clientDTO.getDocument(),clientDTO.getEmail(),clientDTO.getBirthDate(),clientDTO.getUpdateUser(),clientDTO.getCreationDate());
+        Client client = new Client(clientDTO.getIdType(),clientDTO.getName(), clientDTO.getLastname(),
+                clientDTO.getDocument(),clientDTO.getEmail(),clientDTO.getBirthDate(),clientDTO.getUpdateUser(),
+                clientDTO.getCreationDate());
 
         int years = Period.between(clientDTO.getBirthDate(), clientDTO.getCreationDate()).getYears();
         if(years < 18)
-            return new ResponseEntity<>(new Message("The client must be 18 or older to create an account"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Message("The client must be 18 or older to create an account"),
+                    HttpStatus.BAD_REQUEST);
 
         clientService.save(client);
 

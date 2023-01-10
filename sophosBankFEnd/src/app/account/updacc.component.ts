@@ -40,17 +40,17 @@ export class UpdaccComponent {
   updAccount():void{
     const id = this.activatedRoute.snapshot.params.id;
     this.accountService.updateAcc(id, this.account).subscribe(
-      data => {
-        this.toastr.success('Producto Actualizado', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
-        });
-        this.router.navigate(['/clients/accounts', id]);
-      },
-      err => {
-        this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000,  positionClass: 'toast-top-center',
-        });
-      }
+        data => {
+          this.toastr.success('Producto Actualizado', 'OK', {
+            timeOut: 3000, positionClass: 'toast-top-center'
+          });
+          this.router.navigate(['/clients/accounts', id]);
+        },
+        err => {
+          this.toastr.error(err.error.mensaje, 'Fail', {
+            timeOut: 3000,  positionClass: 'toast-top-center',
+          });
+        }
       )
     }
   }

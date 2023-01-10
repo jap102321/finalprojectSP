@@ -2,8 +2,12 @@
     <div class="form-group">
         <form (ngSubmit)="updAccount()" novalidate #f="ngForm">
             <label for="acc_status">Estado de cuenta</label>
-            <input type="text" class="form-control" placeholder="Preguntar al cliente, si no poner activa" id="acc_status" name="acc_status" [(ngModel)]="account.acc_status">
-            <button class="btn btn-outline-success btn-block" [disabled]="!f.valid" >Crear</button>
+            <select name="acc_status" id="acc_status" [(ngModel)]="account.acc_status" style="display:block">
+                <option value="Activa">Activa</option>
+                <option value="Inactiva">Inactiva</option>
+                <option value="Inactiva">Cancelada</option>
+            </select>
+            <button class="btn btn-outline-success btn-block" [disabled]="!f.valid" >Actualizar</button>
         </form>
     </div>
 </div>

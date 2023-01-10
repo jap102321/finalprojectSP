@@ -46,17 +46,22 @@ loadClient(id:number) : void{
 }
 
 onCreateAcc(){
+  const id = this.activatedRoute.snapshot.params.id;
+
      let account : Accounts = new Accounts(this.client, this.accNumber,this.acc_type,this.balance,this.updated_at,this.acc_status, this.transaction)
 
-     this.accountService.save(account).subscribe({
-       next:(res)=> this.toastr.success('Cuenta añadida', 'OK',{
-         timeOut:3000
-       }),
-       error: (err) => this.toastr.error('Error al crear la cuenta, revisa sus datos', 'Ok',{
-         timeOut:3000
-       }),
-       complete: ()=> this.router.navigateByUrl("/clients")
-     })
+     this.accountService.save(account).subscribe( 
+      data => {
+      this.toastr.success('Producto Actualizado', 'OK', {
+        timeOut: 3000, positionClass: 'toast-top-center'
+      });
+      this.router.navigate(['/clients/accounts', id]);
+    },
+    err => {
+      this.toastr.error(err.error.mensaje, 'Fail', {
+        timeOut: 3000,  positionClass: 'toast-top-center',
+      });
+    })
   console.log(this.acc)
   }
 }
