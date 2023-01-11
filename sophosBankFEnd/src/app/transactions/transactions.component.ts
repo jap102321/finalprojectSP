@@ -26,6 +26,7 @@ export class TransactionsComponent implements OnInit{
   this.loadTransac(acc_id)
   }
 
+  
   loadAccount(acc_id:number): void{
     this.accountService.detailAcc(acc_id).subscribe(
       data =>{

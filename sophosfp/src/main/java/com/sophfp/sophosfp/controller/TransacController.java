@@ -40,14 +40,15 @@ public class TransacController {
     }
 
     @PostMapping("/inacc")
-    public ResponseEntity<?> transac(@RequestBody TransacDTO transacDTO
-                                    ){
+    public ResponseEntity<?> transac(@RequestBody TransacDTO transacDTO){
         Long acc_id = transacDTO.getAccount().getAccid();
+
         if(StringUtils.isBlank(transacDTO.getTransac_type()))
             return new ResponseEntity<>(new Message("The transaction type is mandatory"), HttpStatus.BAD_REQUEST);
         if(transacDTO.getAccount().equals("")){
             return new ResponseEntity<>(new Message("You should add an account"), HttpStatus.BAD_REQUEST);
         }
+
         Account accountUpd = accountService.getOne(acc_id).get();
         Transaction transaction = new Transaction(transacDTO.getAccount(),transacDTO.getTransac_type(),
                 transacDTO.getAmount(),transacDTO.getTransac_date());
@@ -57,11 +58,10 @@ public class TransacController {
 
 
         if(transacDTO.getTransac_type().equalsIgnoreCase("deposit")){
-
             double addedValue = currentBalance + amountTransac ;
             accountUpd.setBalance(addedValue);
-
         }
+
 
         if (transacDTO.getTransac_type().equalsIgnoreCase("withdraw")) {
             if(transacDTO.getAccount().getAcc_type().equalsIgnoreCase("corriente")
@@ -75,11 +75,20 @@ public class TransacController {
             accountUpd.setBalance(addedValue);
         }
 
+        if(transacDTO.getTransac_type().equalsIgnoreCase("transfer")){
+           String accSend = transacDTO.getAccount().getAccNumber();
+           if(accountService.existsByaccNumber(accSend)){
+             Account accSender = accountService.findByaccNumber(accSend).get();
+             accSender.getBalance();
+           }
+        }
+
         accountService.save(accountUpd);
         transactionService.save(transaction);
 
        return new ResponseEntity<>(new Message("Transaction successful"), HttpStatus.OK);
     }
+
 
 
 

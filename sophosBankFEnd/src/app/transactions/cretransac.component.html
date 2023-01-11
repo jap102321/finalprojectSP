@@ -1,3 +1,7 @@
+
+<div class="backbtn">
+    <button [routerLink]="['/clients/accounts', account.accid]"  class="btn-back"><i class="fa-solid fa-less-than"></i>Volver</button>
+</div>
 <div class="container">
     <div class="form">
         <form (ngSubmit)="onTransac()" novalidate #f="ngForm">

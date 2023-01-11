@@ -1,15 +1,21 @@
+.container{
+    display: flex;
+    justify-content: center;
+}
 .devInfo{
     display: flex;
-    max-width: 400px;
+    max-width: 700px;
     margin-block-start: 1rem;
 }
 
+.divInfoImage{
+    margin-inline-end: 10rem;
+}
 
 .devInfoInside {
-    display: flex;
-    align-items: center;
     gap: .5px;
-    margin-inline-start: 1rem;
+    margin-inline-start: 1.5rem;
+
 }
 .devInfoInside p{
     display: flex;
@@ -18,4 +24,15 @@
 a{
     text-decoration: none;
     color: currentColor;
+}
+
+.btn{
+    padding: 1.5rem;
+    border: none;
+    background-color: black;
+    color: white;
+}
+
+.btn i{
+    width: 24px;
 }

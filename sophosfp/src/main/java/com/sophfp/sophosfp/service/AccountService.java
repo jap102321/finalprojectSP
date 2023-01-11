@@ -23,6 +23,10 @@ public class AccountService {
         return accountRepository.existsByaccNumber(accNumber);
     }
 
+    public Optional<Account> findByaccNumber(String accNumber){
+        return accountRepository.findByaccNumber(accNumber);
+    }
+
     public List<Account> findByClientId(Long id){
         return accountRepository.findByClientId(id);
     }

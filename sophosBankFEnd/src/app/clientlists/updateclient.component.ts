@@ -12,6 +12,7 @@ import { ClientServiceService } from '../service/client-service.service';
 export class UpdateclientComponent {
 
   client: any = '' ;
+  updateDate: Date = new Date()
 
   constructor(
     private clientService : ClientServiceService,
@@ -41,14 +42,14 @@ export class UpdateclientComponent {
     }
   );
 }
-  onUpdate(): void {
+  onUpdate(){
     const id = this.activatedRoute.snapshot.params.id;
     this.clientService.update(id, this.client).subscribe(
       data => {
         this.toastr.success('Producto Actualizado', 'OK', {
           timeOut: 3000, positionClass: 'toast-top-center'
         });
-        this.router.navigate(['/accounts']);
+        this.router.navigate(['/clients']);
       },
       err => {
         this.toastr.error(err.error.mensaje, 'Fail', {

@@ -1,21 +1,27 @@
-<div class="transacList">
-    <table class="table transacList">
-        <thead>
-            <tr>
-                <th scope="col">Id transacción</th>
-                <th scope="col">Número de cuenta</th>
-                <th scope="col">Tipo de transacción</th>
-                <th scope="col">Cantidad Transacción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let transac of transactions">
-                <td>{{transac.trans_id}}</td>
-                <td>{{account.accNumber}}</td>
-                <td>{{transac.transac_type}}</td>
-                <td>$ {{transac.amount}}</td>
 
-            </tr>
-        </tbody>
-    </table>
+<div class="backbtn">
+    <button [routerLink]="['/clients/accounts', account.accid]"  class="btn-back"><i class="fa-solid fa-less-than"></i>Volver</button>
+</div>
+<div class="container">
+    <div class="transacList">
+        <table class="table transacListInside">
+            <thead>
+                <tr>
+                    <th scope="col">Id transacción</th>
+                    <th scope="col">Número de cuenta</th>
+                    <th scope="col">Tipo de transacción</th>
+                    <th scope="col">Cantidad Transacción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let transac of transactions">
+                    <td>{{transac.trans_id}}</td>
+                    <td>{{account.accNumber}}</td>
+                    <td>{{transac.transac_type}}</td>
+                    <td>$ {{transac.amount}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
