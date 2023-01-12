@@ -1,6 +1,7 @@
 package com.sophfp.sophosfp.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -29,7 +30,9 @@ public class Account {
     @Column(name = "BALANCE")
     private Double balance;
     @Column(name = "DATE_DB")
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     private LocalDate created_at = LocalDate.now();
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     private LocalDate updated_at = LocalDate.now();
     @Column(name = "ACC_STATUS")
     private String acc_status;

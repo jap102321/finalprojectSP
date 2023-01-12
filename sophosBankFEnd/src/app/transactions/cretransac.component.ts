@@ -41,16 +41,6 @@ loadAccount(acc_id:number): void{
   )
 }
 
-loadClient(id:number) : void{
-  this.clientService.detail(id).subscribe(
-    data =>{
-      this.client = data;
-    },
-    err=>{
-      console.log(err)
-    }
-  )
-}
 
 onTransac(){
   const acc_id = this.activatedRoute.snapshot.params.id;

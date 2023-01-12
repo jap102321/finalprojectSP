@@ -31,11 +31,9 @@ public class Client implements Serializable {
     @Column(name = "BIRTH_DATE")
     private LocalDate birthDate;
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
-
     @Column(name = "CREATION_DATE")
     private LocalDate creationDate = LocalDate.now();
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
-
     @Column(name="UPDATE_DATE")
     private LocalDate updateDate = LocalDate.now();
 
@@ -49,7 +47,7 @@ public class Client implements Serializable {
 
     }
 
-    public Client(String idType, String name, String lastname, Long document, String email, LocalDate birthDate, String updateUser, LocalDate creationDate) {
+    public Client(String idType, String name, String lastname, Long document, String email, LocalDate birthDate) {
         this.idType = idType;
         this.name = name;
         this.lastname = lastname;

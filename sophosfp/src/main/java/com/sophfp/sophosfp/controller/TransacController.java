@@ -64,24 +64,19 @@ public class TransacController {
 
 
         if (transacDTO.getTransac_type().equalsIgnoreCase("withdraw")) {
-            if(transacDTO.getAccount().getAcc_type().equalsIgnoreCase("corriente")
-                    && transacDTO.getAccount().getBalance() <= -3000000){
-                return new ResponseEntity<>(new Message("You don't have enough balance"), HttpStatus.BAD_REQUEST);
-            } else if (transacDTO.getAccount().getAcc_type().equalsIgnoreCase("ahorros") &&
-                    transacDTO.getAccount().getBalance() <= 0) {
-                return new ResponseEntity<>(new Message("You don't have enough balance"), HttpStatus.BAD_REQUEST);
-            }
+
             double addedValue = currentBalance - amountTransac ;
             accountUpd.setBalance(addedValue);
+            if(accountUpd.getAcc_type().equalsIgnoreCase("corriente")
+                    && accountUpd.getBalance()  <= -3000000){
+                return new ResponseEntity<>(new Message("You don't have enough balance"), HttpStatus.BAD_REQUEST);
+            } else if (accountUpd.getAcc_type().equalsIgnoreCase("ahorros") &&
+                    accountUpd.getBalance()  <= 0) {
+                return new ResponseEntity<>(new Message("You don't have enough balance"), HttpStatus.BAD_REQUEST);
+            }
+
         }
 
-        if(transacDTO.getTransac_type().equalsIgnoreCase("transfer")){
-           String accSend = transacDTO.getAccount().getAccNumber();
-           if(accountService.existsByaccNumber(accSend)){
-             Account accSender = accountService.findByaccNumber(accSend).get();
-             accSender.getBalance();
-           }
-        }
 
         accountService.save(accountUpd);
         transactionService.save(transaction);

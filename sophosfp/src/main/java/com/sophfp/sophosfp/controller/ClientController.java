@@ -48,8 +48,7 @@ public class ClientController {
             return new ResponseEntity<>(new Message("The document is already registered"), HttpStatus.BAD_REQUEST);
 
         Client client = new Client(clientDTO.getIdType(),clientDTO.getName(), clientDTO.getLastname(),
-                clientDTO.getDocument(),clientDTO.getEmail(),clientDTO.getBirthDate(),clientDTO.getUpdateUser(),
-                clientDTO.getCreationDate());
+                clientDTO.getDocument(),clientDTO.getEmail(),clientDTO.getBirthDate());
 
         int years = Period.between(clientDTO.getBirthDate(), clientDTO.getCreationDate()).getYears();
         if(years < 18)
@@ -78,7 +77,6 @@ public class ClientController {
         clientUpd.setEmail(clientDTO.getEmail());
         clientUpd.setBirthDate(clientDTO.getBirthDate());
         clientUpd.setUpdateUser(clientDTO.getUpdateUser());
-        clientUpd.setUpdateDate((clientDTO.getUpdateDate()));
         clientService.save(clientUpd);
 
         return new ResponseEntity<>(new Message("Client updated"), HttpStatus.OK);
