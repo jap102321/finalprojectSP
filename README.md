@@ -6,3 +6,5 @@ Java 17.
 Angular framework.
 Typescript.
 CSS.
+
+Se usaron las dependencias de Apachelang 3 y lombok
