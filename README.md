@@ -7,4 +7,6 @@ Angular framework.
 Typescript.
 CSS.
 
-Se usaron las dependencias de Apachelang 3 y lombok
+Se usaron las dependencias de Apachelang 3 
+y lombok, así mismo jpa hibernate, springboot starter web
+Y MySQL connector
